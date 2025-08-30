@@ -1,20 +1,38 @@
-# === Base image ===
-FROM node:20-alpine
+# FROM node:18
 
-# === Set working directory ===
-WORKDIR /app
+# # Use the root app directory as the working directory
+# WORKDIR /app
 
-# === Copy package files ===
-COPY package*.json ./
+# # Copy all files into the container
+# COPY . .
 
-# === Install dependencies ===
-RUN npm install --production
+# # Install dependencies
+# RUN npm install
 
-# === Copy source code ===
-COPY ./src ./src
+# # Start using the script defined in package.json
+# CMD ["node", "src/app.js"]
 
-# === Expose port ===
-EXPOSE 3000
+FROM node:22-alpine
 
-# === Start server ===
-CMD ["npm", "start"]
+# Switch back to the node user
+USER node
+
+ENV NODE_ENV production
+
+# Create the /app directory
+WORKDIR /home/node/app
+
+# Copy package.json and package-lock.json first and install dependencies
+COPY package*.json /home/node/app/
+USER root
+RUN npm install
+
+# Copy the rest of the application files
+COPY . /home/node/app/
+
+# Change ownership of the entire /home/node directory
+RUN chown -R node:node /home/node
+USER node
+
+# Start the application
+CMD ["node", "src/app.js"]

@@ -19,12 +19,13 @@
     "http": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.16.5",
+    "railway": "^2.0.17",
     "redis": "^5.6.1",
     "socket.io": "^4.8.1",
     "socket.io-redis": "^6.1.1",
     "uuid": "^11.1.0"
   },
-    "devDependencies": {
+  "devDependencies": {
     "eslint": "^8.47.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.0.0",
@@ -34,5 +35,4 @@
     "eslint-plugin-prettier": "^5.0.0",
     "nodemon": "^3.0.1"
   }
-
 }
