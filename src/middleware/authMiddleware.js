@@ -1,4 +1,4 @@
-const { verifyToken } = require('../services/userService.js');
+const { verifyToken } = require('../services/userService');
 
 module.exports.authMiddleware = (req, res, next) => {
   console.log('Auth middleware triggered');
@@ -10,4 +10,5 @@ module.exports.authMiddleware = (req, res, next) => {
 
   req.user = payload;
   next();
-}
+  return res.status(200).json({ message: 'Authenticated', user: payload });
+};

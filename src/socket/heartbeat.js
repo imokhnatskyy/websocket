@@ -1,4 +1,5 @@
-module.exports.setupHeartbeat = (io, { intervalMs = 50000 } = {}) => {
+/* eslint-disable no-param-reassign, no-restricted-syntax */
+module.exports.setupHeartbeat = (io, { intervalMs = 3000000 } = {}) => {
   io.use((socket, next) => {
     socket.data = socket.data || {};
     socket.data.isAlive = true;

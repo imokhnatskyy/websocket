@@ -6,9 +6,9 @@ const {
   hashPassword,
   comparePassword,
   users
-} = require('../services/userService.js');
+} = require('../services/userService');
 
-const createAuthRoutes = (pubClient) => {
+const createAuthRoutes = pubClient => {
   const router = express.Router();
 
   router.post('/register', async (req, res) => {
@@ -23,6 +23,7 @@ const createAuthRoutes = (pubClient) => {
     users.set(username, { id, username, passwordHash });
 
     res.json({ id, username });
+    return res.status(201).json({ id, username });
   });
 
   router.post('/login', async (req, res) => {
@@ -43,6 +44,7 @@ const createAuthRoutes = (pubClient) => {
     await pubClient.hSet('sessions', user.id, JSON.stringify({ username: user.username }));
 
     res.json({ token });
+    return res.status(200).json({ token });
   });
 
   return router;
